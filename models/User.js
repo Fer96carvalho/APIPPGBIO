@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017');
+mongoose.connect(process.env.uri);
+require('dotenv').config()
+
 
 const User = mongoose.model('User', {
     nome: String,

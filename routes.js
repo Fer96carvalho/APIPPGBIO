@@ -1,11 +1,13 @@
 const { MongoClient, ObjectId } = require("mongodb");
-const uri = "mongodb://localhost:27017";
+const uri = process.env.uri;
 const client = new MongoClient(uri);
 const express = require("express");
 const passport = require("./auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const uploadImageMiddleware = require("./uploadImageMiddleware");
+require('dotenv').config()
+
 
 
 function configureRoutes(app) {
