@@ -19,7 +19,6 @@ app.options("*", cors());
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
 const criarUsuarioAdmin = require('./admin-credentials');
-const handleOptions = require("./handleOptions");
 
 app.use(express.json());
 
