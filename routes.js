@@ -55,7 +55,7 @@ function configureRoutes(app) {
     async (req, res) => {
       const usuario = req.params.id;
       try {
-        const verifyUsuario = await await client.db("PPG_Teste").collection("Users").findOne({ _id: ObjectId(usuario) });
+        const verifyUsuario = await await client.db("PPG_Teste").collection("Users").findOne({ _id: new ObjectId(usuario) });
         if (verifyUsuario.passport != "Admin") {
           return res.status(401).json({ messsage: "Acesso negado! Voce não tem permissão para criar novos usuarios." });
         }
@@ -119,7 +119,7 @@ function configureRoutes(app) {
 
       // Atualize a notícia com base no ID
       const result = await collection.updateOne(
-        { _id: ObjectId(noticiaId) },
+        { _id: new ObjectId(noticiaId) },
         { $set: newNotice }
       );
 
@@ -141,7 +141,7 @@ function configureRoutes(app) {
 
     try {
       const collection = client.db("PPG_Teste").collection("Noticias");
-      const result = await collection.deleteOne({ _id: ObjectId(noticiaId) });
+      const result = await collection.deleteOne({ _id: new ObjectId(noticiaId) });
 
       if (result.deletedCount === 1) {
         res.status(200).json({ message: "Notícia deletada com sucesso." });
@@ -342,7 +342,7 @@ function configureRoutes(app) {
 
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
-      const result = await collection.deleteOne({ _id: ObjectId(imagemId) });
+      const result = await collection.deleteOne({ _id: new ObjectId(imagemId) });
 
       if (result.deletedCount === 1) {
         res.status(200).json({ message: "Imagem deletada com sucesso." });
@@ -398,7 +398,7 @@ function configureRoutes(app) {
     try {
       const collection = client.db("PPG_Teste").collection("Corpo_docente");
       const result = await collection.updateOne(
-        { _id: ObjectId(docenteId) },
+        { _id: new ObjectId(docenteId) },
         { $set: novosDados }
       );
 
@@ -420,7 +420,7 @@ function configureRoutes(app) {
 
     try {
       const collection = client.db("PPG_Teste").collection("Corpo_docente");
-      const result = await collection.deleteOne({ _id: ObjectId(docenteId) });
+      const result = await collection.deleteOne({ _id: new ObjectId(docenteId) });
 
       if (result.deletedCount === 1) {
         res.status(200).json({ message: "Docente deletado com sucesso" });
