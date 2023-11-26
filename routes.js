@@ -326,7 +326,7 @@ function configureRoutes(app) {
         return res.status(404).json({ message: 'ID não encontrado' });
       }
 
-      res.status(200).json({ message: 'URL atualizada com sucesso', id: resultado.value._id });
+      res.status(200).json({ message: 'URL atualizada com sucesso', id: id });
     } catch (err) {
       console.error("Erro ao atualizar a URL da imagem", err);
       res.status(500).json({ message: "Erro ao atualizar a URL da imagem", err });
