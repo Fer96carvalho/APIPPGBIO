@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const handleOptions = require("./handleOptions");
 require('dotenv').config()
 const port = process.env.ServerPort;
 
@@ -13,10 +14,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(handleOptions);
 
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
 const criarUsuarioAdmin = require('./admin-credentials');
+const handleOptions = require("./handleOptions");
 
 app.use(express.json());
 
