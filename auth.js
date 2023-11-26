@@ -13,7 +13,7 @@ const jwtOptions = {
 passport.use(new JwtStrategy(jwtOptions, (jwtPayload, done) => {
   try {
     const user = User.findById(jwtPayload.userId);
-    console.log(user);
+    req.user = jwtPayload.userId;
     
     if (user) {
       console.log("Autorizado");

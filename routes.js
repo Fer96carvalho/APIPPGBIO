@@ -313,6 +313,8 @@ function configureRoutes(app) {
   app.put("/carrousel-img/",passport.authenticate("jwt", { session: false }), async (req, res) => {
     const id = req.body.id;
     const novaUrl = req.body.newUrl;
+    const user = req.user;
+    console.log(user);
 
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
