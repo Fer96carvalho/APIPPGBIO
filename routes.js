@@ -311,6 +311,7 @@ function configureRoutes(app) {
 
   // Atualizando imagem existente
   app.put("/carrousel-img/",passport.authenticate("jwt", { session: false }), async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     const id = req.body.id;
     const novaUrl = req.body.newUrl;
 
