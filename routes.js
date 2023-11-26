@@ -294,7 +294,7 @@ function configureRoutes(app) {
     }
   });
   // Post img carrosel
-  app.post("/carrousel-img", async (req, res) => {
+  app.post("/carrousel-img",passport.authenticate("jwt", { session: false }), async (req, res) => {
     const newImage = {
       url: req.body.url
     }
@@ -310,7 +310,7 @@ function configureRoutes(app) {
   });
 
   // Atualizando imagem existente
-  app.put("/carrousel-img/", async (req, res) => {
+  app.put("/carrousel-img/",passport.authenticate("jwt", { session: false }), async (req, res) => {
     const id = req.body.id;
     const novaUrl = req.body.newUrl;
 
