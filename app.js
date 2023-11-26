@@ -1,20 +1,18 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const handleOptions = require("./handleOptions");
 require('dotenv').config()
 const port = process.env.ServerPort;
 
 const corsOptions = {
   origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
   optionsSuccessStatus: 204,
   allowedHeaders: "Content-Type,Authorization,Origin,X-Requested-With,Accept",
 };
 
 app.use(cors(corsOptions));
-app.use(handleOptions);
 
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
