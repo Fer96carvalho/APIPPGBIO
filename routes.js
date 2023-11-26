@@ -293,10 +293,11 @@ function configureRoutes(app) {
       res.status(500).json({ error: "Erro ao buscar imagens." });
     }
   });
-
   // Post img carrosel
   app.post("/carrousel-img", async (req, res) => {
-    const newImage = req.body;
+    const newImage = {
+      url: req.body.url
+    }
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
       const imagem = await collection.insertOne(newImage);
