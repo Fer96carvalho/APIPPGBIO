@@ -5,7 +5,7 @@ require('dotenv').config()
 const port = process.env.ServerPort;
 
 const corsOptions = {
-  origin: "*",
+  origin: '*',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
   optionsSuccessStatus: 200,
