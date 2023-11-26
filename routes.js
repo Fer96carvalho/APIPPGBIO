@@ -317,7 +317,7 @@ function configureRoutes(app) {
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
       const resultado = await collection.findOneAndUpdate(
-        { _id: ObjectId(id) },
+        { _id: new ObjectId(id) },
         { $set: { url: novaUrl } },
         { returnDocument: 'after' }
       );
