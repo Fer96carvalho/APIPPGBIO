@@ -160,7 +160,7 @@ function configureRoutes(app) {
   app.get("/noticias", async (req, res) => {
     try {
       const collection = client.db("PPG_Teste").collection("Noticias");
-      const noticias = (await collection.find({}).sort({data: -1, hora:-1}).toArray());
+      const noticias = (await collection.find({}).sort({ data: -1, hora: -1 }).toArray());
       res.json(noticias);
     } catch (err) {
       console.error("Erro ao buscar notícias:", err);
@@ -175,7 +175,7 @@ function configureRoutes(app) {
       if (!cat) {
         return res.status(400).json({ error: "Parâmetro cat ausente na URL." });
       }
-  
+
       const collection = client.db("PPG_Teste").collection("Noticias");
       const noticias = await collection
         .find({ categorias: { $regex: cat, $options: "i" } })
@@ -186,7 +186,7 @@ function configureRoutes(app) {
       res.status(500).json({ error: "Erro ao buscar notícias." });
     }
   });
-  
+
 
 
   // get categorias noticia
@@ -271,9 +271,9 @@ function configureRoutes(app) {
       const noticias = await collection
         .find({ titulo: { $regex: titulo, $options: "i" } })
         .toArray();
-      if (noticias.length == 0){
-        return res.status(404).json({message: "Nenhuma noticia encontrada!"});
-      }else {
+      if (noticias.length == 0) {
+        return res.status(404).json({ message: "Nenhuma noticia encontrada!" });
+      } else {
         res.json(noticias);
       }
     } catch (err) {
@@ -311,7 +311,7 @@ function configureRoutes(app) {
   app.put("/carrousel-img/", async (req, res) => {
     const id = req.body.id;
     const novaUrl = req.body.newUrl;
-  
+
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
       const resultado = await collection.findOneAndUpdate(
@@ -319,11 +319,11 @@ function configureRoutes(app) {
         { $set: { url: novaUrl } },
         { returnDocument: 'after' }
       );
-  
+
       if (!resultado.value) {
         return res.status(404).json({ message: 'ID não encontrado' });
       }
-  
+
       res.status(200).json({ message: 'URL atualizada com sucesso', id: resultado.value._id });
     } catch (err) {
       console.error("Erro ao atualizar a URL da imagem", err);
@@ -454,22 +454,22 @@ function configureRoutes(app) {
 
 
   // Rota para lidar com o upload de imagem
-//   app.post("/img/upload", passport.authenticate("jwt", { session: false }), uploadImageMiddleware, async (req, res) => {
-//     try {
-//       const collection = client.db("PPG_Teste").collection("Imagens");
-//       const result = await collection.insertOne(req.novaImagem);
+  //   app.post("/img/upload", passport.authenticate("jwt", { session: false }), uploadImageMiddleware, async (req, res) => {
+  //     try {
+  //       const collection = client.db("PPG_Teste").collection("Imagens");
+  //       const result = await collection.insertOne(req.novaImagem);
 
-//       res.status(201).json({
-//         message: "Imagem enviada e salva no MongoDB.",
-//         id: result.insertedId,
-//       });
-//     } catch (err) {
-//       console.error("Erro ao salvar a imagem", err);
-//       res.status(500).json({ nessage: "Erro ao salvar a imagem", err });
-//     }
-//   });
+  //       res.status(201).json({
+  //         message: "Imagem enviada e salva no MongoDB.",
+  //         id: result.insertedId,
+  //       });
+  //     } catch (err) {
+  //       console.error("Erro ao salvar a imagem", err);
+  //       res.status(500).json({ nessage: "Erro ao salvar a imagem", err });
+  //     }
+  //   });
 
-//   app.use(express.json());
-// }
+  //   app.use(express.json());
+}
 
 module.exports = { configureRoutes };
