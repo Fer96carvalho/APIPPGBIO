@@ -5,7 +5,7 @@ require('dotenv').config()
 const port = process.env.ServerPort;
 
 const corsOptions = {
-  origin: '*',
+  origin: ['https://cassiasantos.github.io/PPG-Biociencias-UFOPA/blog.html, http://127.0.0.1:5500'],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
   preflightContinue: true,
@@ -14,7 +14,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors());
 
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
