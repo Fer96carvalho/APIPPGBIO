@@ -10,9 +10,9 @@ const jwtOptions = {
   secretOrKey: process.env.SecretKey,
 };
 
-passport.use(new JwtStrategy(jwtOptions, async(jwtPayload, done) => {
+passport.use(new JwtStrategy(jwtOptions, (jwtPayload, done) => {
   try {
-    const user = await User.findById(jwtPayload.userId);
+    const user =  User.findById(jwtPayload.userId);
     
     if (user) {
       console.log("Autorizado");
