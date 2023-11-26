@@ -322,7 +322,7 @@ function configureRoutes(app) {
         { returnDocument: 'after' }
       );
 
-      if (!resultado.value) {
+      if (!resultado) {
         return res.status(404).json({ message: 'ID não encontrado' });
       }
 
