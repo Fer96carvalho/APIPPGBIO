@@ -16,9 +16,9 @@ passport.use(new JwtStrategy(jwtOptions, async(jwtPayload, done) => {
     
     if (user) {
       console.log("Autorizado");
-      console.log(user);
       return done(null, user);
     } else {
+      console.log(user);
       console.log("Não autorizado");
       return done(null, false);
     }
