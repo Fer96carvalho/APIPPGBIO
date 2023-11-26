@@ -13,6 +13,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors());
 
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
