@@ -298,10 +298,11 @@ function configureRoutes(app) {
     const newImage = {
       url: req.body.url
     }
+    
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
       const imagem = await collection.insertOne(newImage);
-      res.status(201).json({ message: "Imagem adicionada com sucesso", id: imagem.insertedId });
+      res.status(201).json({ message: "Imagem adicionada com sucesso", id: imagem.insertedId, img: newImage });
     } catch (err) {
       console.error("Erro ao inserir imagem", err);
       res.status(500).json({ message: "Erro ao inserir a imagem", err });
