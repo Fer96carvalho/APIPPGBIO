@@ -334,7 +334,7 @@ function configureRoutes(app) {
 
   // Delete imagem carrosel
   app.delete("/carrousel-img/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
-    const imagemId = req.params.id; URL
+    const imagemId = req.params.id;
 
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
@@ -454,22 +454,22 @@ function configureRoutes(app) {
 
 
   // Rota para lidar com o upload de imagem
-  app.post("/img/upload", passport.authenticate("jwt", { session: false }), uploadImageMiddleware, async (req, res) => {
-    try {
-      const collection = client.db("PPG_Teste").collection("Imagens");
-      const result = await collection.insertOne(req.novaImagem);
+//   app.post("/img/upload", passport.authenticate("jwt", { session: false }), uploadImageMiddleware, async (req, res) => {
+//     try {
+//       const collection = client.db("PPG_Teste").collection("Imagens");
+//       const result = await collection.insertOne(req.novaImagem);
 
-      res.status(201).json({
-        message: "Imagem enviada e salva no MongoDB.",
-        id: result.insertedId,
-      });
-    } catch (err) {
-      console.error("Erro ao salvar a imagem", err);
-      res.status(500).json({ nessage: "Erro ao salvar a imagem", err });
-    }
-  });
+//       res.status(201).json({
+//         message: "Imagem enviada e salva no MongoDB.",
+//         id: result.insertedId,
+//       });
+//     } catch (err) {
+//       console.error("Erro ao salvar a imagem", err);
+//       res.status(500).json({ nessage: "Erro ao salvar a imagem", err });
+//     }
+//   });
 
-  app.use(express.json());
-}
+//   app.use(express.json());
+// }
 
 module.exports = { configureRoutes };
