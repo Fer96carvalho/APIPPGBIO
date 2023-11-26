@@ -8,6 +8,7 @@ const corsOptions = {
   origin: '*',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
+  preflightContinue: true,
   optionsSuccessStatus: 200,
   allowedHeaders: "Content-Type,Authorization,Origin,X-Requested-With,Accept",
 };
