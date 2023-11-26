@@ -295,14 +295,39 @@ function configureRoutes(app) {
   });
 
   // Post img carrosel
-  app.post("/carrousel-img", uploadImageMiddleware, async (req, res) => {
+  app.post("/carrousel-img", async (req, res) => {
+    const newImage = req.body;
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
-      const imagem = await collection.insertOne(req.novaImagem);
+      const imagem = await collection.insertOne(newImage);
       res.status(201).json({ message: "Imagem adicionada com sucesso", id: imagem.insertedId });
     } catch (err) {
       console.error("Erro ao inserir imagem", err);
       res.status(500).json({ message: "Erro ao inserir a imagem", err });
+    }
+  });
+
+  // Atualizando imagem existente
+  app.put("/carrousel-img/", async (req, res) => {
+    const id = req.body.id;
+    const novaUrl = req.body.newUrl;
+  
+    try {
+      const collection = client.db("PPG_Teste").collection("Img_carrosel");
+      const resultado = await collection.findOneAndUpdate(
+        { _id: id },
+        { $set: { url: novaUrl } },
+        { returnDocument: 'after' }
+      );
+  
+      if (!resultado.value) {
+        return res.status(404).json({ message: 'ID não encontrado' });
+      }
+  
+      res.status(200).json({ message: 'URL atualizada com sucesso', id: resultado.value._id });
+    } catch (err) {
+      console.error("Erro ao atualizar a URL da imagem", err);
+      res.status(500).json({ message: "Erro ao atualizar a URL da imagem", err });
     }
   });
 
