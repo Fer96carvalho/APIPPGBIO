@@ -40,7 +40,7 @@ function configureRoutes(app) {
         { userId: user_match._id },
         process.env.SecretKey,
         {
-          expiresIn: "1h",
+          expiresIn: "2h",
         }
       );
       res.json({ Token: token, id: user_match._id });
@@ -269,7 +269,7 @@ function configureRoutes(app) {
 
       const collection = client.db("PPG_Teste").collection("Noticias");
       const noticias = await collection
-        .find({ titulo: { $regex: titulo, $options: "i" } })
+        .find({ titulo: { $regex: titulo, $options: "i" } }).sort({ data: -1, hora: -1 })
         .toArray();
       if (noticias.length == 0) {
         return res.status(404).json({ message: "Nenhuma noticia encontrada!" });
@@ -313,8 +313,9 @@ function configureRoutes(app) {
   app.put("/carrousel-img/",passport.authenticate("jwt", { session: false }), async (req, res) => {
     const id = req.body.id;
     const novaUrl = req.body.newUrl;
-    const userAuth = req.user;
-    console.log(userAuth);
+
+    // const userAuth = req.user;
+    // console.log(userAuth);
 
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
