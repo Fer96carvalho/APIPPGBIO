@@ -40,10 +40,10 @@ function configureRoutes(app) {
         { userId: user_match._id },
         process.env.SecretKey,
         {
-          expiresIn: "2h",
+          expiresIn: "6h",
         }
       );
-      res.json({ Token: token, id: user_match._id });
+      res.json({ Token: token, id: user_match._id, autor: user_match.nome });
     } catch (err) {
       console.error("Erro ao se autenticar:", err);
       return res.status(401).json({ mensage: "Erro ao autenticar!" });
