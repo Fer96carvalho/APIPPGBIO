@@ -110,7 +110,7 @@ function configureRoutes(app) {
 
 
   // Update noticia
-  app.put("/noticias/id/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  app.put("/noticia/id/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     const noticiaId = req.params.id;
     const newNotice = req.body;
 
@@ -136,7 +136,7 @@ function configureRoutes(app) {
 
 
   //Delete Noticias
-  app.delete("/noticias/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
+  app.delete("/noticia/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
     const noticiaId = req.params.id;
 
     try {
