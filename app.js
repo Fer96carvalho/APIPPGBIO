@@ -4,16 +4,36 @@ const cors = require("cors");
 require('dotenv').config()
 const port = process.env.ServerPort;
 
-const corsOptions = {
-  origin: ['https://cassiasantos.github.io/PPG-Biociencias-UFOPA/blog.html', 'http://127.0.0.1:5500'],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  credentials: true,
-  preflightContinue: true,
-  optionsSuccessStatus: 200,
-  allowedHeaders: "Content-Type,Authorization,Origin,X-Requested-With,Accept",
-};
+// const corsOptions = {
+//   origin: ['https://cassiasantos.github.io/PPG-Biociencias-UFOPA/blog.html', 'http://127.0.0.1:5500'],
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+//   credentials: true,
+//   preflightContinue: true,
+//   optionsSuccessStatus: 200,
+//   allowedHeaders: "Content-Type,Authorization,Origin,X-Requested-With,Accept",
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+
+app.options('*', (req, res) => {
+  const allowedOrigins = ['http://localhost:5500', 'https://cassiasantos.github.io'];
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,Origin,X-Requested-With,Accept');
+  res.header('Access-Control-Allow-Credentials', 'true');
+
+  // Se for uma preflight request, envie uma resposta 200 OK
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+  } else {
+    next();
+  }
+});
 
 
 
