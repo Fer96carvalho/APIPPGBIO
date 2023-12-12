@@ -21,13 +21,14 @@ app.options('*', (req, res) => {
 
   if (allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
+  }else{
+    console.log(origin);
   }
 
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization,Origin,X-Requested-With,Accept');
   res.header('Access-Control-Allow-Credentials', 'true');
 
-  // Se for uma preflight request, envie uma resposta 200 OK
   if (req.method === 'OPTIONS') {
     res.status(200).end();
   } else {
