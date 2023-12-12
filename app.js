@@ -5,7 +5,7 @@ require('dotenv').config()
 const port = process.env.ServerPort;
 
 const corsOptions = {
-  origin: ['https://cassiasantos.github.io/PPG-Biociencias-UFOPA/blog.html', 'http://127.0.0.1:5500'],
+  origin: ['https://cassiasantos.github.io', 'http://127.0.0.1:5500'],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
   preflightContinue: true,
