@@ -13,6 +13,13 @@ require('dotenv').config()
 function configureRoutes(app) {
   // ROTAS DA API
 
+
+  app.get('/', (req,res){
+    let origin = req.headers.origin;
+
+    res.json({origin: origin})
+  });
+
   // Rota de login
   app.post("/login", async (req, res) => {
     const userLogin = req.body;
