@@ -14,7 +14,7 @@ function configureRoutes(app) {
   // ROTAS DA API
 
 
-  app.get('/', (req,res){
+  app.get('/', (req,res)=>{
     let origin = req.headers.origin;
 
     res.json({origin: origin})
