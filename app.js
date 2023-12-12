@@ -16,7 +16,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
 const criarUsuarioAdmin = require('./admin-credentials');
