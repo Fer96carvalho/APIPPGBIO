@@ -370,7 +370,7 @@ function configureRoutes(app) {
   app.get("/corpo-academico", async (req, res) => {
     try {
       const collection = client.db("PPG_Teste").collection("Corpo_docente");
-      const docentes = await collection.find({}).toArray();
+      const docentes = await collection.find({}).sort({ nomeCompleto: 1 }).toArray();
       res.json(docentes);
     } catch (err) {
       console.error("Erro ao buscar Corpo Docente:", err);
