@@ -53,6 +53,7 @@ function configureRoutes(app) {
         httpOnly: true,
         secure: true, // Apenas para HTTPS
         maxAge: 3600000,
+        domaind: '.cassiasantos.github.io',
         sameSite: 'None',
         overwhite: true
       });
