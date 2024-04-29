@@ -58,16 +58,18 @@ function configureRoutes(app) {
 
       // res.json({ Token: token, id: user_match._id, autor: user_match.nome });
 
-      res.cookie('token', token, {
+      return res.cookie('token', token, {
         httpOnly: false,
         secure: true, // Apenas para HTTPS
-        maxAge: 3600000
-      });
+        maxAge: 3600000,
+        domain: 'cassiasantos.github.io/',
+        path: '/'
+      }).status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
 
       let usuario = {
         autor: user_match.nome
       };
-      return res.status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
+      // return res.status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
 
     } catch (err) {
       console.error("Erro ao se autenticar:", err);
