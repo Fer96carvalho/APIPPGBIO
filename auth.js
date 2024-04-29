@@ -8,7 +8,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 let cookieExtractor = function(req) {
   let token = null;
   if (req && req.cookies) {
-      token = req.cookies['jwt'];
+      token = req.cookies['token'];
   }
   return token;
 };
