@@ -60,7 +60,7 @@ function configureRoutes(app) {
 
       res.cookie('token', token, {
         httpOnly: true,
-        secure: false, // Apenas para HTTPS
+        secure: true, // Apenas para HTTPS
         maxAge: 3600000,
         domain: 'cassiasantos.github.io',
         path: '/'
