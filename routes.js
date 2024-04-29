@@ -43,14 +43,33 @@ function configureRoutes(app) {
       if (!check_password || !user_match) {
         return res.status(401).json({ mensage: "Usuario ou senha incorreto!" });
       }
+      // const token = jwt.sign(
+      //   { userId: user_match._id },
+      //   process.env.SecretKey,
+      //   {
+      //     expiresIn: "6h",
+      //   }
+      // );
+
       const token = jwt.sign(
         { userId: user_match._id },
-        process.env.SecretKey,
-        {
-          expiresIn: "6h",
-        }
+        process.env.SecretKey
       );
-      res.json({ Token: token, id: user_match._id, autor: user_match.nome });
+
+      // res.json({ Token: token, id: user_match._id, autor: user_match.nome });
+
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: false, // Apenas para HTTPS
+        maxAge: 3600000,
+        domain: 'https://cassiasantos.github.io, http://127.0.0.1/5500'
+      });
+
+      let usuario = {
+        autor: user_match.nome
+      };
+      return res.status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
+
     } catch (err) {
       console.error("Erro ao se autenticar:", err);
       return res.status(401).json({ mensage: "Erro ao autenticar!" });

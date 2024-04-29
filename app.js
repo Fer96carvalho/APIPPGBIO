@@ -19,6 +19,15 @@ app.use(cors(corsOptions));
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");
 const criarUsuarioAdmin = require('./admin-credentials');
+const cookieJwtExtractor = (req, res, next) => {
+  // Verifica se o token está presente nos cookies
+  if (req.cookies && req.cookies.token) {
+    // Adiciona o token ao cabeçalho de autorização
+    req.headers['authorization'] = `Bearer ${req.cookies.token}`;
+  }
+  next();
+};
+
 
 app.use(express.json());
 
@@ -26,6 +35,7 @@ connectDatabase(); // Conecta ao banco de dados
 configureRoutes(app); // Configura as rotas
 criarUsuarioAdmin(); // Cria o usuario Admin no Banco de Dados
 
+app.use(cookieJwtExtractor);
 app.use(express.json());
 app.listen(port, () => {
   console.log(`Servidor Express rodando na porta ${port}`);
