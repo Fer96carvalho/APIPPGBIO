@@ -44,14 +44,13 @@ function configureRoutes(app) {
         return res.status(401).json({ mensage: "Usuario ou senha incorreto!" });
       }
     
-
       const token = jwt.sign(
         { userId: user_match._id },
         process.env.SecretKey
       );
 
       res.cookie('token', token, {
-        httpOnly: false,
+        httpOnly: true,
         secure: true, // Apenas para HTTPS
         maxAge: 3600000
       });
