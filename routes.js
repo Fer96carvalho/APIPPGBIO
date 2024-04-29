@@ -62,7 +62,8 @@ function configureRoutes(app) {
         httpOnly: true,
         secure: false, // Apenas para HTTPS
         maxAge: 3600000,
-        domain: 'cassiasantos.github.io'
+        domain: 'cassiasantos.github.io',
+        path: "/"
       });
 
       let usuario = {
