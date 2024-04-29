@@ -14,10 +14,10 @@ function configureRoutes(app) {
   // ROTAS DA API
 
 
-  app.get('/', (req,res)=>{
+  app.get('/', (req, res) => {
     let origin = req.headers.origin;
 
-    res.json({origin: origin})
+    res.json({ origin: origin })
   });
 
   // Rota de login
@@ -43,34 +43,24 @@ function configureRoutes(app) {
       if (!check_password || !user_match) {
         return res.status(401).json({ mensage: "Usuario ou senha incorreto!" });
       }
-      // const token = jwt.sign(
-      //   { userId: user_match._id },
-      //   process.env.SecretKey,
-      //   {
-      //     expiresIn: "6h",
-      //   }
-      // );
+    
 
       const token = jwt.sign(
         { userId: user_match._id },
         process.env.SecretKey
       );
 
-      // res.json({ Token: token, id: user_match._id, autor: user_match.nome });
-
       res.cookie('token', token, {
         httpOnly: false,
         secure: true, // Apenas para HTTPS
-        maxAge: 3600000,
-        domain: 'cassiasantos.github.io/',
-        path: '/'
+        maxAge: 3600000
       });
-      console.log(req.cookies.token);
+
       let usuario = {
         autor: user_match.nome
       };
-    
-    return res.status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
+
+      return res.status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
 
     } catch (err) {
       console.error("Erro ao se autenticar:", err);
@@ -322,11 +312,11 @@ function configureRoutes(app) {
     }
   });
   // Post img carrosel
-  app.post("/carrousel-img",passport.authenticate("jwt", { session: false }), async (req, res) => {
+  app.post("/carrousel-img", passport.authenticate("jwt", { session: false }), async (req, res) => {
     const newImage = {
       url: req.body.url
     }
-    
+
     try {
       const collection = client.db("PPG_Teste").collection("Img_carrosel");
       const imagem = await collection.insertOne(newImage);
@@ -338,7 +328,7 @@ function configureRoutes(app) {
   });
 
   // Atualizando imagem existente
-  app.put("/carrousel-img/",passport.authenticate("jwt", { session: false }), async (req, res) => {
+  app.put("/carrousel-img/", passport.authenticate("jwt", { session: false }), async (req, res) => {
     const id = req.body.id;
     const novaUrl = req.body.newUrl;
 
