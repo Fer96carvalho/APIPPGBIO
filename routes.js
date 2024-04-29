@@ -65,7 +65,7 @@ function configureRoutes(app) {
         domain: 'cassiasantos.github.io/',
         path: '/'
       });
-
+      console.log(req.cookies.token);
       let usuario = {
         autor: user_match.nome
       };
