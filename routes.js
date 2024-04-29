@@ -52,7 +52,8 @@ function configureRoutes(app) {
       res.cookie('token', token, {
         httpOnly: true,
         secure: true, // Apenas para HTTPS
-        maxAge: 3600000
+        maxAge: 3600000,
+        sameSite: 'None'
       });
 
       let usuario = {
