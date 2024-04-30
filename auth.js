@@ -1,8 +1,10 @@
 require('dotenv').config()
-const User = require('./models/User');
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const { MongoClient, ObjectId } = require("mongodb");
+const uri = process.env.uri;
+const client = new MongoClient(uri);
 
 let cookieExtractor = function(req) {
   let token = null;
@@ -13,13 +15,16 @@ let cookieExtractor = function(req) {
 };
 
 const jwtOptions = {
-  jwtFromRequest: [ExtractJwt.fromAuthHeaderAsBearerToken(), cookieExtractor],
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken() || cookieExtractor,
   secretOrKey: process.env.SecretKey,
 };
 
 passport.use(new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
   try {
-    const user = await User.findById(jwtPayload.userId);
+
+    const user_db = client.db("PPG_Teste").collection("Users");
+    const user = await user_db.findOne({ _id: new ObjectId(jwtPayload.userId)});
+
 
     if (user) {
       console.log("Autorizado");
