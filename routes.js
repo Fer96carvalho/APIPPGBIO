@@ -54,6 +54,7 @@ function configureRoutes(app) {
         secure: true, // Apenas para HTTPS
         maxAge: 3600000,
         domaind: '.cassiasantos.github.io',
+        path: '/PPG-Biociencias-UFOPA/',
         sameSite: 'None',
         overwhite: true
       });
