@@ -32,9 +32,7 @@ function configureRoutes(app) {
 
     try {
       const user_collection = client.db("PPG_Teste").collection("Users");
-      const user_match = await user_collection.findOne({
-        email: userLogin.email,
-      });
+      const user_match = await user_collection.findOne({ email: userLogin.email });
       const check_password = await bcrypt.compare(
         userLogin.senha,
         user_match.senha
@@ -56,7 +54,7 @@ function configureRoutes(app) {
         domaind: '.cassiasantos.github.io',
         path: '/PPG-Biociencias-UFOPA/',
         sameSite: 'None',
-        overwhite: true
+        overwrite: true
       });
 
       let usuario = {
