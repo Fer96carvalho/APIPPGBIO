@@ -57,11 +57,9 @@ function configureRoutes(app) {
         overwrite: true
       });
 
-      let usuario = {
-        autor: user_match.nome
-      };
+      let usuario = user_match.nome;
 
-      return res.status(200).json({ message: `Login bem-sucedido, ${usuario.autor}`, usuario });
+      return res.status(200).json({ message: `Login bem-sucedido, ${usuario}`, autor: usuario });
 
     } catch (err) {
       console.error("Erro ao se autenticar:", err);
