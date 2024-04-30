@@ -60,7 +60,7 @@ function configureRoutes(app) {
 
       let usuario = user_match.nome;
 
-      return res.status(200).json({ message: `Login bem-sucedido, ${usuario}`, autor: usuario });
+      return res.status(200).json({ message: `Login bem-sucedido, ${usuario}`, autor: usuario, token: token });
 
     } catch (err) {
       console.error("Erro ao se autenticar:", err);
