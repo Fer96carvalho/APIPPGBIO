@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require('dotenv').config()
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
 const port = process.env.ServerPort;
 
 const corsOptions = {
@@ -15,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use(cookieParser('appgbio@2024.ufopa'));
 
 const { connectDatabase } = require("./database");
 const { configureRoutes } = require("./routes");

@@ -53,6 +53,7 @@ function configureRoutes(app) {
         maxAge: 3600000,
         domain: '.cassiasantos.github.io',
         path: '/PPG-Biociencias-UFOPA/',
+        signed: true,
         sameSite: 'None',
         overwrite: true
       });
