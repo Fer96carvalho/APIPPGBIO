@@ -4,20 +4,20 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
-let token = null;
 let cookieExtractor = function(req) {
+  let token = null;
   if (req.cookies && req.cookies.token) {
-      token = req.cookies.token;
+      token = req.cookies;
   }
   return token;
 };
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: [ExtractJwt.fromAuthHeaderAsBearerToken(), cookieExtractor],
   secretOrKey: process.env.SecretKey,
 };
 
-if (token =! null) jwtOptions.jwtFromRequest = cookieExtractor;
+jwtOptions.jwtFromRequest = cookieExtractor;
 
 passport.use(new JwtStrategy(jwtOptions, (jwtPayload, done) => {
   try {
