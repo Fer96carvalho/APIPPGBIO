@@ -51,7 +51,7 @@ function configureRoutes(app) {
         httpOnly: false,
         secure: true, // Apenas para HTTPS
         maxAge: 3600000,
-        domaind: '.cassiasantos.github.io',
+        domain: '.cassiasantos.github.io',
         path: '/PPG-Biociencias-UFOPA/',
         sameSite: 'None',
         overwrite: true
