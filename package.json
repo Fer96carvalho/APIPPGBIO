@@ -2,7 +2,7 @@
   "name": "API-PPG",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Fernando",
+  "author": "Fernando L. L. Carvalho e Cassia Oliveira dos Santos",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon app.js"
